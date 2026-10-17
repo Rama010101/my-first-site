@@ -99,3 +99,51 @@ footer, .footer {
     padding-top: 20px;
     border-top: 1px solid #ddd;
 }
+/* === Сетка для карточек === */
+.cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* === Карточки === */
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    flex: 1;
+    min-width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 10px;
+}
+
+/* === Кнопки === */
+.btn {
+    display: inline-block;
+    background: #2980b9;
+    color: white !important;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background: #1f6391;
+    transform: translateY(-2px);
+}
