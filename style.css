@@ -1,0 +1,101 @@
+/* === Базовые настройки === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f6f8;
+    color: #333;
+    line-height: 1.7;
+    padding: 30px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* === Навигация === */
+nav {
+    background: #2c3e50;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #f39c12;
+}
+
+/* === Заголовки === */
+h1 {
+    color: #2c3e50;
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: #2980b9;
+    font-size: 26px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+/* === Параграфы === */
+p {
+    margin-bottom: 12px;
+}
+
+/* === Списки === */
+ul, ol {
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+/* === Картинка === */
+img {
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    margin: 15px 0;
+}
+
+/* === Ссылки в тексте === */
+a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* === Линия === */
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 25px 0;
+}
+
+/* === Подвал === */
+footer, .footer {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
