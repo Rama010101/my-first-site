@@ -1,3 +1,12 @@
+/* === Переменные (цвета сайта) === */
+:root {
+    --primary: #2980b9;       /* основной синий */
+    --dark: #2c3e50;          /* тёмно-синий для заголовков */
+    --bg: #f4f6f8;            /* фон страницы */
+    --card-bg: #ffffff;       /* фон карточек */
+    --text: #333;             /* цвет текста */
+}
+
 /* === Базовые настройки === */
 * {
     margin: 0;
@@ -7,8 +16,8 @@
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f4f6f8;
-    color: #333;
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.7;
     padding: 30px 20px;
     max-width: 900px;
@@ -17,7 +26,7 @@ body {
 
 /* === Навигация === */
 nav {
-    background: #2c3e50;
+    background: var(--dark);
     padding: 15px 20px;
     border-radius: 10px;
     margin-bottom: 25px;
@@ -37,13 +46,13 @@ nav a:hover {
 
 /* === Заголовки === */
 h1 {
-    color: #2c3e50;
+    color: var(--dark);
     font-size: 38px;
     margin-bottom: 15px;
 }
 
 h2 {
-    color: #2980b9;
+    color: var(--primary);
     font-size: 26px;
     margin-top: 30px;
     margin-bottom: 15px;
@@ -51,12 +60,11 @@ h2 {
     border-bottom: 2px solid #ecf0f1;
 }
 
-/* === Параграфы === */
+/* === Параграфы и списки === */
 p {
     margin-bottom: 12px;
 }
 
-/* === Списки === */
 ul, ol {
     margin-left: 25px;
     margin-bottom: 15px;
@@ -66,16 +74,15 @@ li {
     margin-bottom: 6px;
 }
 
-/* === Картинка === */
+/* === Картинки и ссылки === */
 img {
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     margin: 15px 0;
 }
 
-/* === Ссылки в тексте === */
 a {
-    color: #2980b9;
+    color: var(--primary);
     text-decoration: none;
 }
 
@@ -83,14 +90,13 @@ a:hover {
     text-decoration: underline;
 }
 
-/* === Линия === */
+/* === Линии и подвал === */
 hr {
     border: none;
     border-top: 1px solid #ddd;
     margin: 25px 0;
 }
 
-/* === Подвал === */
 footer, .footer {
     text-align: center;
     color: #888;
@@ -99,6 +105,7 @@ footer, .footer {
     padding-top: 20px;
     border-top: 1px solid #ddd;
 }
+
 /* === Сетка для карточек === */
 .cards-grid {
     display: flex;
@@ -109,9 +116,10 @@ footer, .footer {
 
 /* === Карточки === */
 .card {
-    background: #ffffff;
-    border-radius: 12px;
+    background: var(--card-bg);
+    color: var(--text);
     padding: 25px;
+    border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     flex: 1;
     min-width: 280px;
@@ -125,7 +133,7 @@ footer, .footer {
 
 .card h2 {
     margin-top: 0;
-    color: #2c3e50;
+    color: var(--dark);
     border-bottom: 2px solid #ecf0f1;
     padding-bottom: 10px;
 }
@@ -133,8 +141,8 @@ footer, .footer {
 /* === Кнопки === */
 .btn {
     display: inline-block;
-    background: #2980b9;
-    color: white !important;
+    background: var(--primary);
+    color: #ffffff !important;
     padding: 12px 24px;
     border-radius: 8px;
     text-decoration: none !important;
@@ -146,4 +154,48 @@ footer, .footer {
 .btn:hover {
     background: #1f6391;
     transform: translateY(-2px);
+}
+
+/* === Мобильная версия (экраны до 768px) === */
+@media (max-width: 768px) {
+    
+    body {
+        padding: 15px 10px;
+    }
+
+    nav {
+        padding: 10px;
+    }
+
+    nav a {
+        display: block;
+        margin: 8px 0;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .cards-grid {
+        flex-direction: column;
+    }
+
+    .card {
+        min-width: 100%;
+    }
+
+    img {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .btn {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
 }
