@@ -248,3 +248,32 @@ body.dark-theme .btn:hover {
 body.dark-theme nav {
     background: #111;
 }
+.counter-box {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#click-count {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary);
+}
+.counter-box {
+    background: var(--card-bg);
+    padding: 15px 25px;
+    border-radius: 10px;
+    display: inline-flex;      /* делает блок компактным, по размеру содержимого */
+    align-items: center;
+    gap: 15px;                 /* расстояние между текстом и кнопкой */
+    margin: 15px 0 25px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* В темной теме пусть фон тоже темнеет */
+body.dark-theme .counter-box {
+    background: #2d2d2d;
+}

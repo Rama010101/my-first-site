@@ -14,3 +14,25 @@ themeBtn.addEventListener('click', () => {
         themeBtn.textContent = '🌙 Тёмная тема';
     }
 });
+// === Задание 1: Приветствие ===
+const greetBtn = document.querySelector('#greet-btn');
+
+greetBtn.addEventListener('click', () => {
+    // 1. Спрашиваем имя (появится окошко ввода)
+    let userName = prompt("Как тебя зовут?");
+    
+    // 2. Если пользователь нажал "Отмена" или ничего не ввел — не здороваемся
+    if (userName) {
+        // 3. Показываем приветствие
+        alert("Привет, " + userName + "! Рад видеть тебя на моём сайте!");
+    }
+});
+// === Задание 2: Счётчик кликов ===
+const clickBtn = document.querySelector('#click-btn');
+const counterDisplay = document.querySelector('#click-count');
+let count = 0; // Начальное значение
+
+clickBtn.addEventListener('click', () => {
+    count = count + 1;           // Увеличиваем счётчик на 1
+    counterDisplay.textContent = count; // Обновляем текст на странице
+});
