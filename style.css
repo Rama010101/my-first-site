@@ -382,3 +382,42 @@ body.dark-theme #todo-list li {
 body.dark-theme #todo-list li.completed {
     background: #3a3a3a;
 }
+/* === Стили для фильтров === */
+.todo-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.filter-btn:hover {
+    background: #e0e0e0;
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Тёмная тема для фильтров */
+body.dark-theme .filter-btn {
+    border-color: #555;
+    color: #ccc;
+}
+body.dark-theme .filter-btn:hover {
+    background: #3a3a3a;
+}
+body.dark-theme .filter-btn.active {
+    background: var(--primary);
+    color: white;
+}
