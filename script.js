@@ -1,68 +1,108 @@
-// 1. Находим кнопку на странице
+// ==========================================
+// 1. ТЁМНАЯ ТЕМА
+// ==========================================
 const themeBtn = document.querySelector('#theme-toggle');
 
-// 2. Добавляем "слушатель событий" (слушаем клик)
-themeBtn.addEventListener('click', () => {
-    
-    // 3. Переключаем класс "dark-theme" на теге <body>
-    document.body.classList.toggle('dark-theme');
+if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        if (document.body.classList.contains('dark-theme')) {
+            themeBtn.textContent = '☀️ Светлая тема';
+        } else {
+            themeBtn.textContent = '🌙 Тёмная тема';
+        }
+    });
+}
 
-    // 4. Меняем текст на кнопке в зависимости от темы
-    if (document.body.classList.contains('dark-theme')) {
-        themeBtn.textContent = '☀️ Светлая тема';
-    } else {
-        themeBtn.textContent = '🌙 Тёмная тема';
-    }
-});
-// === Задание 1: Приветствие ===
+// ==========================================
+// 2. КНОПКА "ПРИВЕТСТВИЕ"
+// ==========================================
 const greetBtn = document.querySelector('#greet-btn');
 
-greetBtn.addEventListener('click', () => {
-    // 1. Спрашиваем имя (появится окошко ввода)
-    let userName = prompt("Как тебя зовут?");
-    
-    // 2. Если пользователь нажал "Отмена" или ничего не ввел — не здороваемся
-    if (userName) {
-        // 3. Показываем приветствие
-        alert("Привет, " + userName + "! Рад видеть тебя на моём сайте!");
-    }
-});
-// === Задание 2: Счётчик кликов ===
+if (greetBtn) {
+    greetBtn.addEventListener('click', () => {
+        let userName = prompt("Как тебя зовут?");
+        if (userName) {
+            alert("Привет, " + userName + "! Рад видеть тебя на моём сайте!");
+        }
+    });
+}
+
+// ==========================================
+// 3. СЧЁТЧИК КЛИКОВ
+// ==========================================
 const clickBtn = document.querySelector('#click-btn');
 const counterDisplay = document.querySelector('#click-count');
-let count = 0; // Начальное значение
+let count = 0;
 
-clickBtn.addEventListener('click', () => {
-    count = count + 1;           // Увеличиваем счётчик на 1
-    counterDisplay.textContent = count; // Обновляем текст на странице
-});
-// === To-Do List с сохранением (localStorage) ===
+if (clickBtn && counterDisplay) {
+    clickBtn.addEventListener('click', () => {
+        count = count + 1;
+        counterDisplay.textContent = count;
+    });
+}
+
+// ==========================================
+// 4. TO-DO LIST С СОХРАНЕНИЕМ И СТАТУСОМ
+// ==========================================
 const todoInput = document.querySelector('#todo-input');
 const todoAddBtn = document.querySelector('#todo-add-btn');
 const todoList = document.querySelector('#todo-list');
 
-// 1. Загружаем задачи из localStorage (если есть) или создаем пустой массив
+// Загружаем задачи из localStorage (если есть) или создаем пустой массив
 let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
 
-// 2. Функция для отрисовки всех задач на странице
+// Функция для сохранения задач в localStorage
+function saveTasks() {
+    localStorage.setItem('myTasks', JSON.stringify(tasks));
+}
+
+// Функция для отрисовки всех задач на странице
 function renderTasks() {
+    if (!todoList) return; // если на странице нет списка, выходим
     todoList.innerHTML = ''; // очищаем список перед отрисовкой
 
-    tasks.forEach((taskText, index) => {
+    tasks.forEach((task, index) => {
+        // Проверяем формат: старый (строка) или новый (объект)
+        let taskText = typeof task === 'string' ? task : task.text;
+        let isCompleted = typeof task === 'object' ? task.completed : false;
+
         const li = document.createElement('li');
-        
+        if (isCompleted) {
+            li.classList.add('completed'); // добавляем класс для зачёркивания
+        }
+
+        // Создаём текст задачи
         const span = document.createElement('span');
         span.textContent = taskText;
-        
+
+        // Создаём кнопку удаления
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Удалить';
         deleteBtn.className = 'delete-btn';
-        
-        // При клике на "Удалить" — удаляем задачу из массива и перерисовываем
-        deleteBtn.addEventListener('click', () => {
+
+        // Обработчик клика на текст задачи (переключение статуса)
+        span.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            
+            // Если задача была строкой, превращаем её в объект
+            if (typeof tasks[index] === 'string') {
+                tasks[index] = { text: tasks[index], completed: true };
+            } else {
+                // Если объект, просто переключаем статус
+                tasks[index].completed = !tasks[index].completed;
+            }
+            
+            saveTasks();
+            renderTasks(); // перерисовываем список
+        });
+
+        // Обработчик удаления
+        deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
             tasks.splice(index, 1); // удаляем 1 элемент по индексу
-            saveTasks();            // сохраняем изменения
-            renderTasks();          // перерисовываем
+            saveTasks();
+            renderTasks();
         });
 
         li.appendChild(span);
@@ -71,29 +111,28 @@ function renderTasks() {
     });
 }
 
-// 3. Функция для сохранения задач в localStorage
-function saveTasks() {
-    localStorage.setItem('myTasks', JSON.stringify(tasks));
+// Добавление новой задачи
+if (todoAddBtn && todoInput) {
+    todoAddBtn.addEventListener('click', () => {
+        const taskText = todoInput.value.trim();
+        if (taskText === '') return alert('Напиши задачу!');
+
+        // Сохраняем задачу как объект с полем completed
+        tasks.push({ text: taskText, completed: false });
+        
+        saveTasks();
+        renderTasks();
+        todoInput.value = '';
+        todoInput.focus();
+    });
+
+    // Добавление по Enter
+    todoInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            todoAddBtn.click();
+        }
+    });
 }
 
-// 4. Добавление новой задачи
-todoAddBtn.addEventListener('click', () => {
-    const taskText = todoInput.value.trim();
-    if (taskText === '') return alert('Напиши задачу!');
-
-    tasks.push(taskText); // добавляем в массив
-    saveTasks();          // сохраняем
-    renderTasks();        // перерисовываем
-    todoInput.value = ''; // очищаем поле
-    todoInput.focus();
-});
-
-// 5. Добавление по Enter
-todoInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        todoAddBtn.click();
-    }
-});
-
-// 6. Запускаем отрисовку при загрузке страницы
+// Запускаем отрисовку при загрузке страницы
 renderTasks();
