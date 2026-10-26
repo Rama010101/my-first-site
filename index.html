@@ -7,44 +7,58 @@
 </head>
 <body>
 
+    <!-- Кнопка тёмной темы -->
     <button id="theme-toggle" class="theme-btn">🌙 Тёмная тема</button>
+
+    <!-- Навигация -->
     <nav>
         <a href="index.html">Главная</a> |
         <a href="projects.html">Мои проекты</a> |
         <a href="#contacts">Контакты</a>
-      </nav>
-      
-        <button id="greet-btn" class="theme-btn">👋 Поздороваться</button>
-        <div class="counter-box">
-    <p>Ты нажал на кнопку: <span id="click-count">0</span> раз</p>
-    <button id="click-btn" class="theme-btn">Нажми меня!</button>
-</div>
-<!-- Блок To-Do List -->
-<div class="todo-container">
-    <h2>Мои задачи на день</h2>
-    <div class="todo-filters">
-    <button class="filter-btn active" data-filter="all">Все</button>
-    <button class="filter-btn" data-filter="active">Активные</button>
-    <button class="filter-btn" data-filter="completed">Выполненные</button>
-</div>
-    <div class="todo-input-group">
-        <input type="text" id="todo-input" placeholder="Что нужно сделать?">
-        <button id="todo-add-btn" class="theme-btn">Добавить</button>
-    </div>
-    <ul id="todo-list"></ul>
-</div>   
-<hr>
+    </nav>
 
+    <!-- Блок с интерактивом (Приветствие и Счётчик) -->
+    <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; margin-bottom: 20px;">
+        <button id="greet-btn" class="theme-btn">👋 Поздороваться</button>
+        
+        <div class="counter-box">
+            <span>Ты нажал на кнопку: <b id="click-count">0</b> раз</span>
+            <button id="click-btn" class="theme-btn" style="padding: 5px 10px; font-size: 14px;">Нажми меня!</button>
+        </div>
+    </div>
+
+    <!-- Блок To-Do List -->
+    <div class="todo-container">
+        <h2>Мои задачи на день</h2>
+        
+        <!-- Кнопки фильтров -->
+        <div class="todo-filters">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="active">Активные</button>
+            <button class="filter-btn" data-filter="completed">Выполненные</button>
+        </div>
+
+        <!-- Поле ввода -->
+        <div class="todo-input-group">
+            <input type="text" id="todo-input" placeholder="Что нужно сделать?">
+            <button id="todo-add-btn" class="theme-btn">Добавить</button>
+        </div>
+        
+        <!-- Список задач -->
+        <ul id="todo-list"></ul>
+    </div>
+
+    <hr>
+
+    <!-- Основной контент -->
     <h1>Рамиль</h1>
     <img src="images/my-photo.jpg" alt="Моё фото" width="300">
     <p>Привет! Я начинающий веб-разработчик. Учусь <strong>каждый день</strong> и иду к своей цели.</p>
 
     <hr>
 
-    <!-- Блок с карточками -->
+    <!-- Карточки -->
     <div class="cards-grid">
-        
-        <!-- Карточка 1 -->
         <div class="card">
             <h2>Мои хобби</h2>
             <ul>
@@ -55,7 +69,6 @@
             </ul>
         </div>
 
-        <!-- Карточка 2 -->
         <div class="card">
             <h2>Мои цели на год</h2>
             <ol>
@@ -65,9 +78,7 @@
                 <li>Найти первую работу в IT</li>
             </ol>
         </div>
-
     </div>
-    <!-- Конец блока с карточками -->
 
     <h2>Мои навыки</h2>
     <p>Я уже знаю:</p>
@@ -90,12 +101,14 @@
     </ol>
 
     <h2 id="contacts">Мои контакты</h2>
+    <!-- ОБНОВЛЕН TELEGRAM ЗДЕСЬ -->
     <p>📧 Моя почта: <a href="mailto:usmanov13101985@gmail.com">usmanov13101985@gmail.com</a></p>
-    <p>💬 Telegram: <a href="https://t.me/Rama_Nn" target="_blank" rel="noopener">@Rama_Nn</a> — пишу там <em>каждый день</em></p>
+    <p>💬 Telegram: <a href="https://t.me/Rama_Nh" target="_blank" rel="noopener">@Rama_Nh</a> — пишу там <em>каждый день</em></p>
     <p>🐙 GitHub: <a href="https://github.com/Rama010101" target="_blank" rel="noopener">Rama010101</a></p>
     <p>Пишите мне — я всегда <mark>открыт</mark> к общению!</p>
     
-    <a href="https://t.me/Rama_Nn" target="_blank" rel="noopener" class="btn">Написать в Telegram</a>
+    <!-- ОБНОВЛЕНА КНОПКА TELEGRAM ЗДЕСЬ -->
+    <a href="https://t.me/Rama_Nh" target="_blank" rel="noopener" class="btn">Написать в Telegram</a>
 
     <h2>Любимая цитата</h2>
     <p><mark>«Дорогу осилит идущий»</mark></p>
@@ -103,6 +116,7 @@
     <hr>
     <p style="text-align: center; color: #888; font-size: 14px; margin-top: 40px;">© 2026 Рамиль. Все права защищены.</p>
 
-<script src="script.js"></script>
+    <!-- Подключение скрипта (обязательно в самом конце) -->
+    <script src="script.js"></script>
 </body>
 </html>
