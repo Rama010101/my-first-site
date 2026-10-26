@@ -36,3 +36,53 @@ clickBtn.addEventListener('click', () => {
     count = count + 1;           // Увеличиваем счётчик на 1
     counterDisplay.textContent = count; // Обновляем текст на странице
 });
+// === To-Do List (Список задач) ===
+const todoInput = document.querySelector('#todo-input');
+const todoAddBtn = document.querySelector('#todo-add-btn');
+const todoList = document.querySelector('#todo-list');
+
+// Функция для добавления задачи
+todoAddBtn.addEventListener('click', () => {
+    const taskText = todoInput.value.trim(); // получаем текст, убираем пробелы по краям
+
+    // Если поле пустое — не добавляем
+    if (taskText === '') {
+        alert('Напиши задачу!');
+        return;
+    }
+
+    // Создаём новый элемент <li>
+    const li = document.createElement('li');
+    
+    // Создаём текст задачи
+    const span = document.createElement('span');
+    span.textContent = taskText;
+    
+    // Создаём кнопку удаления
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Удалить';
+    deleteBtn.className = 'delete-btn';
+    
+    // Добавляем обработчик клика на кнопку удаления
+    deleteBtn.addEventListener('click', () => {
+        li.remove(); // удаляет весь <li> из списка
+    });
+
+    // Собираем всё вместе: <li><span>Текст</span><button>Удалить</button></li>
+    li.appendChild(span);
+    li.appendChild(deleteBtn);
+
+    // Добавляем <li> в <ul>
+    todoList.appendChild(li);
+
+    // Очищаем поле ввода после добавления
+    todoInput.value = '';
+    todoInput.focus(); // возвращаем курсор в поле
+});
+
+// Бонус: добавлять задачу по нажатию Enter
+todoInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        todoAddBtn.click();
+    }
+});

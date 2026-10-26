@@ -277,3 +277,74 @@ body.dark-theme nav {
 body.dark-theme .counter-box {
     background: #2d2d2d;
 }
+/* === Стили для To-Do List === */
+.todo-container {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin: 25px 0;
+}
+
+.todo-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#todo-input {
+    flex: 1; /* растягивается на всё свободное место */
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+#todo-input:focus {
+    border-color: var(--primary);
+}
+
+#todo-list {
+    list-style: none; /* убираем стандартные точки */
+    padding: 0;
+    margin: 0;
+}
+
+#todo-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+}
+
+/* Тёмная тема для To-Do */
+body.dark-theme .todo-container {
+    background: #2d2d2d;
+}
+body.dark-theme #todo-input {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #444;
+}
+body.dark-theme #todo-list li {
+    background: #1e1e1e;
+}
