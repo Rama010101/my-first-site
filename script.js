@@ -36,53 +36,64 @@ clickBtn.addEventListener('click', () => {
     count = count + 1;           // Увеличиваем счётчик на 1
     counterDisplay.textContent = count; // Обновляем текст на странице
 });
-// === To-Do List (Список задач) ===
+// === To-Do List с сохранением (localStorage) ===
 const todoInput = document.querySelector('#todo-input');
 const todoAddBtn = document.querySelector('#todo-add-btn');
 const todoList = document.querySelector('#todo-list');
 
-// Функция для добавления задачи
-todoAddBtn.addEventListener('click', () => {
-    const taskText = todoInput.value.trim(); // получаем текст, убираем пробелы по краям
+// 1. Загружаем задачи из localStorage (если есть) или создаем пустой массив
+let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
 
-    // Если поле пустое — не добавляем
-    if (taskText === '') {
-        alert('Напиши задачу!');
-        return;
-    }
+// 2. Функция для отрисовки всех задач на странице
+function renderTasks() {
+    todoList.innerHTML = ''; // очищаем список перед отрисовкой
 
-    // Создаём новый элемент <li>
-    const li = document.createElement('li');
-    
-    // Создаём текст задачи
-    const span = document.createElement('span');
-    span.textContent = taskText;
-    
-    // Создаём кнопку удаления
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Удалить';
-    deleteBtn.className = 'delete-btn';
-    
-    // Добавляем обработчик клика на кнопку удаления
-    deleteBtn.addEventListener('click', () => {
-        li.remove(); // удаляет весь <li> из списка
+    tasks.forEach((taskText, index) => {
+        const li = document.createElement('li');
+        
+        const span = document.createElement('span');
+        span.textContent = taskText;
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Удалить';
+        deleteBtn.className = 'delete-btn';
+        
+        // При клике на "Удалить" — удаляем задачу из массива и перерисовываем
+        deleteBtn.addEventListener('click', () => {
+            tasks.splice(index, 1); // удаляем 1 элемент по индексу
+            saveTasks();            // сохраняем изменения
+            renderTasks();          // перерисовываем
+        });
+
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+        todoList.appendChild(li);
     });
+}
 
-    // Собираем всё вместе: <li><span>Текст</span><button>Удалить</button></li>
-    li.appendChild(span);
-    li.appendChild(deleteBtn);
+// 3. Функция для сохранения задач в localStorage
+function saveTasks() {
+    localStorage.setItem('myTasks', JSON.stringify(tasks));
+}
 
-    // Добавляем <li> в <ul>
-    todoList.appendChild(li);
+// 4. Добавление новой задачи
+todoAddBtn.addEventListener('click', () => {
+    const taskText = todoInput.value.trim();
+    if (taskText === '') return alert('Напиши задачу!');
 
-    // Очищаем поле ввода после добавления
-    todoInput.value = '';
-    todoInput.focus(); // возвращаем курсор в поле
+    tasks.push(taskText); // добавляем в массив
+    saveTasks();          // сохраняем
+    renderTasks();        // перерисовываем
+    todoInput.value = ''; // очищаем поле
+    todoInput.focus();
 });
 
-// Бонус: добавлять задачу по нажатию Enter
+// 5. Добавление по Enter
 todoInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         todoAddBtn.click();
     }
 });
+
+// 6. Запускаем отрисовку при загрузке страницы
+renderTasks();
