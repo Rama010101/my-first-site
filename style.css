@@ -22,6 +22,7 @@ body {
     padding: 30px 20px;
     max-width: 900px;
     margin: 0 auto;
+    transition: background 0.3s, color 0.3s;
 }
 
 /* === Навигация === */
@@ -79,6 +80,7 @@ img {
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     margin: 15px 0;
+    max-width: 100%;
 }
 
 a {
@@ -123,7 +125,7 @@ footer, .footer {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     flex: 1;
     min-width: 280px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
 }
 
 .card:hover {
@@ -149,6 +151,9 @@ footer, .footer {
     font-weight: 600;
     margin-top: 10px;
     transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
 }
 
 .btn:hover {
@@ -156,9 +161,238 @@ footer, .footer {
     transform: translateY(-2px);
 }
 
-/* === Мобильная версия (экраны до 768px) === */
+/* === Стили для интерактивных элементов (счётчик, приветствие) === */
+.theme-btn {
+    background: var(--dark);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.theme-btn:hover {
+    background: #1a252f;
+}
+
+.counter-box {
+    background: var(--card-bg);
+    padding: 15px 25px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    margin: 15px 0 25px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    color: var(--text);
+}
+
+/* === TO-DO LIST === */
+.todo-container {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin: 25px 0;
+    transition: background 0.3s;
+}
+
+.todo-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#todo-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#todo-input:focus {
+    border-color: var(--primary);
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#todo-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 4px solid var(--primary);
+    transition: background 0.2s, opacity 0.2s;
+    cursor: pointer;
+}
+
+#todo-list li span {
+    flex: 1;
+    transition: text-decoration 0.2s, color 0.2s;
+}
+
+/* Класс для выполненной задачи */
+#todo-list li.completed {
+    background: #e0e0e0;
+    opacity: 0.7;
+}
+
+#todo-list li.completed span {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+}
+
+/* === Фильтры === */
+.todo-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    color: var(--text);
+}
+
+.filter-btn:hover {
+    background: #e0e0e0;
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* === Поле редактирования задачи === */
+.edit-input {
+    flex: 1;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 2px solid var(--primary);
+    border-radius: 6px;
+    outline: none;
+    background: #fff;
+    color: #333;
+}
+
+/* ========================================== */
+/* === ТЁМНАЯ ТЕМА === */
+/* ========================================== */
+body.dark-theme {
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme .card h2 {
+    color: #ffffff;
+    border-bottom-color: #444;
+}
+
+body.dark-theme .card,
+body.dark-theme .counter-box,
+body.dark-theme .todo-container {
+    background: #2d2d2d;
+    color: #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+body.dark-theme a {
+    color: #66b3ff;
+}
+
+body.dark-theme hr {
+    border-top-color: #444;
+}
+
+body.dark-theme .btn {
+    background: #66b3ff;
+    color: #1e1e1e !important;
+}
+
+body.dark-theme .btn:hover {
+    background: #4da6ff;
+}
+
+body.dark-theme nav {
+    background: #111;
+}
+
+body.dark-theme #todo-input {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark-theme #todo-list li {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    border-left-color: #66b3ff;
+}
+
+body.dark-theme #todo-list li.completed {
+    background: #111;
+}
+
+body.dark-theme .filter-btn {
+    border-color: #555;
+    color: #ccc;
+}
+
+body.dark-theme .filter-btn:hover {
+    background: #3a3a3a;
+}
+
+body.dark-theme .filter-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+body.dark-theme .edit-input {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #66b3ff;
+}
+
+/* ========================================== */
+/* === МОБИЛЬНАЯ ВЕРСИЯ === */
+/* ========================================== */
 @media (max-width: 768px) {
-    
     body {
         padding: 15px 10px;
     }
@@ -198,226 +432,9 @@ footer, .footer {
         text-align: center;
         width: 100%;
     }
-}
-.theme-btn {
-    background: var(--dark);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-/* === Тёмная тема === */
-body.dark-theme {
-    background: #1e1e1e;
-    color: #e0e0e0;
-}
 
-body.dark-theme h1,
-body.dark-theme h2,
-body.dark-theme .card h2 {
-    color: #ffffff;
-    border-bottom-color: #444;
-}
-
-body.dark-theme .card {
-    background: #2d2d2d;
-    color: #e0e0e0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-}
-
-body.dark-theme a {
-    color: #66b3ff;
-}
-
-body.dark-theme hr {
-    border-top-color: #444;
-}
-
-body.dark-theme .btn {
-    background: #66b3ff;
-    color: #1e1e1e !important;
-}
-
-body.dark-theme .btn:hover {
-    background: #4da6ff;
-}
-
-body.dark-theme nav {
-    background: #111;
-}
-.counter-box {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    margin: 20px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-#click-count {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--primary);
-}
-.counter-box {
-    background: var(--card-bg);
-    padding: 15px 25px;
-    border-radius: 10px;
-    display: inline-flex;      /* делает блок компактным, по размеру содержимого */
-    align-items: center;
-    gap: 15px;                 /* расстояние между текстом и кнопкой */
-    margin: 15px 0 25px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* В темной теме пусть фон тоже темнеет */
-body.dark-theme .counter-box {
-    background: #2d2d2d;
-}
-/* === Стили для To-Do List === */
-.todo-container {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin: 25px 0;
-}
-
-.todo-input-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-#todo-input {
-    flex: 1; /* растягивается на всё свободное место */
-    padding: 10px 15px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-}
-
-#todo-input:focus {
-    border-color: var(--primary);
-}
-
-#todo-list {
-    list-style: none; /* убираем стандартные точки */
-    padding: 0;
-    margin: 0;
-}
-
-#todo-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    border-left: 4px solid var(--primary);
-}
-
-.delete-btn {
-    background: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.delete-btn:hover {
-    background: #c0392b;
-}
-
-/* Тёмная тема для To-Do */
-body.dark-theme .todo-container {
-    background: #2d2d2d;
-}
-body.dark-theme #todo-input {
-    background: #1e1e1e;
-    color: #e0e0e0;
-    border-color: #444;
-}
-body.dark-theme #todo-list li {
-    background: #1e1e1e;
-}
-/* === Стили для выполненных задач === */
-#todo-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    border-left: 4px solid var(--primary);
-    transition: background 0.2s, opacity 0.2s;
-    cursor: pointer; /* чтобы было понятно, что можно кликнуть */
-}
-
-#todo-list li span {
-    flex: 1; /* текст занимает свободное место */
-    transition: text-decoration 0.2s, color 0.2s;
-}
-
-/* Класс для выполненной задачи */
-#todo-list li.completed {
-    background: #e0e0e0;
-    opacity: 0.7;
-}
-
-#todo-list li.completed span {
-    text-decoration: line-through; /* зачёркиваем текст */
-    color: #888;
-}
-
-/* Тёмная тема для выполненных */
-body.dark-theme #todo-list li.completed {
-    background: #3a3a3a;
-}
-/* === Стили для фильтров === */
-.todo-filters {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.filter-btn {
-    background: transparent;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.2s;
-}
-
-.filter-btn:hover {
-    background: #e0e0e0;
-}
-
-.filter-btn.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
-/* Тёмная тема для фильтров */
-body.dark-theme .filter-btn {
-    border-color: #555;
-    color: #ccc;
-}
-body.dark-theme .filter-btn:hover {
-    background: #3a3a3a;
-}
-body.dark-theme .filter-btn.active {
-    background: var(--primary);
-    color: white;
+    /* Мобильные фильтры */
+    .todo-filters {
+        flex-wrap: wrap;
+    }
 }

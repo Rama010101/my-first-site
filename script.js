@@ -34,27 +34,24 @@ if (clickBtn && counterDisplay) {
 }
 
 // ==========================================
-// 4. TO-DO LIST С ФИЛЬТРАМИ И СОХРАНЕНИЕМ
+// 4. TO-DO LIST С ФИЛЬТРАМИ И РЕДАКТИРОВАНИЕМ
 // ==========================================
 const todoInput = document.querySelector('#todo-input');
 const todoAddBtn = document.querySelector('#todo-add-btn');
 const todoList = document.querySelector('#todo-list');
 
-// Загружаем задачи
 let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
-let currentFilter = 'all'; // 'all', 'active', 'completed'
+let currentFilter = 'all'; 
 
-// Сохранение
 function saveTasks() {
     localStorage.setItem('myTasks', JSON.stringify(tasks));
 }
 
-// Отрисовка
 function renderTasks() {
     if (!todoList) return;
     todoList.innerHTML = '';
 
-    // Фильтруем задачи
+    // Фильтрация
     let filteredTasks = tasks.filter(task => {
         const isCompleted = typeof task === 'object' ? task.completed : false;
         if (currentFilter === 'active') return !isCompleted;
@@ -63,7 +60,7 @@ function renderTasks() {
     });
 
     filteredTasks.forEach((task) => {
-        const originalIndex = tasks.indexOf(task); // индекс в основном массиве
+        const originalIndex = tasks.indexOf(task);
         let taskText = typeof task === 'string' ? task : task.text;
         let isCompleted = typeof task === 'object' ? task.completed : false;
 
@@ -73,11 +70,37 @@ function renderTasks() {
         const span = document.createElement('span');
         span.textContent = taskText;
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Удалить';
-        deleteBtn.className = 'delete-btn';
+        // === РЕДАКТИРОВАНИЕ (двойной клик) ===
+        span.addEventListener('dblclick', () => {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = taskText;
+            input.className = 'edit-input';
 
-        // Зачёркивание
+            li.replaceChild(input, span);
+            input.focus();
+
+            const saveEdit = () => {
+                const newText = input.value.trim();
+                if (newText !== '' && newText !== taskText) {
+                    if (typeof tasks[originalIndex] === 'string') {
+                        tasks[originalIndex] = { text: newText, completed: false };
+                    } else {
+                        tasks[originalIndex].text = newText;
+                    }
+                    saveTasks();
+                }
+                renderTasks(); 
+            };
+
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') input.blur(); 
+            });
+            
+            input.addEventListener('blur', saveEdit); 
+        });
+
+        // === ВЫПОЛНЕНИЕ (одинарный клик) ===
         span.addEventListener('click', (e) => {
             e.stopPropagation();
             if (typeof tasks[originalIndex] === 'string') {
@@ -89,7 +112,10 @@ function renderTasks() {
             renderTasks();
         });
 
-        // Удаление
+        // Кнопка удаления
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Удалить';
+        deleteBtn.className = 'delete-btn';
         deleteBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             tasks.splice(originalIndex, 1);
@@ -120,7 +146,7 @@ if (todoAddBtn && todoInput) {
     });
 }
 
-// === Логика фильтров ===
+// Фильтры
 const filterButtons = document.querySelectorAll('.filter-btn');
 if (filterButtons.length > 0) {
     filterButtons.forEach(btn => {
@@ -132,3 +158,6 @@ if (filterButtons.length > 0) {
         });
     });
 }
+
+// Запуск
+renderTasks();
